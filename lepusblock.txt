@@ -1,0 +1,17 @@
+ lepus:
+    image: quay.io/fiware/lepus
+    container_name: fiware-lepus
+    hostname: adapter
+    networks:
+      - fiware_network
+    expose:
+      - "3005"
+    ports:
+      - "3005:3000"
+    environment:
+      DEBUG: "adapter:*"
+      #NGSI_VERSION: "ld"
+      NGSI_V2_CONTEXT_BROKER: "http://nodered:1880/lepusproxy"
+      USER_CONTEXT_URL: "http://nodered:1880/user-context"
+      CORE_CONTEXT_URL: "http://nodered:1880/context"
+      NOTIFICATION_RELAY_URL: "http://adapter:3000/notify"

@@ -1,0 +1,45 @@
+version: "3.5"
+orion-ld:
+    image: quay.io/fiware/orion-ld
+    hostname: orion
+    container_name: fiware-orion-ld
+    depends_on:
+        - mongo-db
+    networks:
+        - default
+    ports:
+        - "1026:1026"
+    command: -dbhost mongo-db -logLevel DEBUG
+    healthcheck:
+        test: curl --fail -s http://orion:1026/version || exit 1
+
+orion:
+    image: quay.io/fiware/orion
+    hostname: orion2
+    container_name: fiware-orion-v2
+    depends_on:
+        - mongo-for-orion-v2
+    networks:
+        - default
+    ports:
+        - "1027:1026" # localhost:1026
+    command: -dbURI mongodb://mongo-db2 -logLevel DEBUG
+    healthcheck:
+        test: curl --fail -s http://orion2:1026/version || exit 1
+
+lepus:
+    image: quay.io/fiware/lepus
+    hostname: adapter
+    container_name: fiware-lepus
+    networks:
+        - default
+    expose:
+        - "3005"
+    ports:
+        - "3005:3000"
+    environment:
+        - DEBUG=adapter:*
+        - NGSI_V2_CONTEXT_BROKER=http://orion2:1026
+        - USER_CONTEXT_URL=http://context/fixed-context.jsonld
+        - CORE_CONTEXT_URL=https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.8.jsonld
+        - NOTIFICATION_RELAY_URL=http://adapter:3000/notify

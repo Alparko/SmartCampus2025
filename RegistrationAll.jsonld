@@ -1,0 +1,30 @@
+{
+  "id": "urn:ngsi-ld:ContextSourceRegistration:lepus-all-properties",
+  "type": "ContextSourceRegistration",
+  "endpoint": "http://adapter:3000/ngsi-ld/v1/entities",
+  "information": [
+    {
+      "entities": [
+        {
+          "idPattern": ".*",
+          "type": "Device"
+        }
+      ]
+    }
+  ],
+  "contextSourceInfo": [
+    {
+      "key": "jsonldContext",
+      "value": "http://nodered:1880/user-context.jsonld"
+    },
+    {
+      "key": "Prefer",
+      "value": "ngsi-ld=1.6"
+    }
+  ],
+  "operations": ["federationOps"],
+  "mode": "inclusive",
+  "@context": [
+    "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.8.jsonld"
+  ]
+}

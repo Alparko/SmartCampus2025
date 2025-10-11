@@ -1,0 +1,1415 @@
+[
+    {
+        "id": "6a9b87f63a2da681",
+        "type": "tab",
+        "label": "Flujo 1",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5fb6928c81256c34",
+        "type": "tab",
+        "label": "Flujo 2",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "45472ef887a7fba0",
+        "type": "tab",
+        "label": "Flujo 3",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "bb62fbf51e7a7598",
+        "type": "tab",
+        "label": "IoT Devices - Simulator",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1199ad461d5d2146",
+        "type": "tab",
+        "label": "context flujo",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9903a474bc5343cb",
+        "type": "mqtt-broker",
+        "name": "HiveMQ",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "90a9c08dfccbeafe",
+        "type": "mqtt-broker",
+        "name": "MQTT broker mosquitto ",
+        "broker": "mosquitto",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "155ca4005ea38fe5",
+        "type": "inject",
+        "z": "6a9b87f63a2da681",
+        "d": true,
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 520,
+        "wires": [
+            [
+                "9a25a4556a239871"
+            ]
+        ]
+    },
+    {
+        "id": "9a25a4556a239871",
+        "type": "function",
+        "z": "6a9b87f63a2da681",
+        "name": "function 1",
+        "func": "msg.payload = {\n  \"numValue\": Math.floor(Math.random() * (30 - 15 + 1)) + 15  // Valor de temperatura simulado entre 15 y 30 grados\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 520,
+        "wires": [
+            [
+                "a95027e7648f58c2"
+            ]
+        ]
+    },
+    {
+        "id": "a95027e7648f58c2",
+        "type": "mqtt out",
+        "z": "6a9b87f63a2da681",
+        "name": "",
+        "topic": "orion/device-measurement/numValue",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9903a474bc5343cb",
+        "x": 890,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "765c09b47d730b44",
+        "type": "mqtt in",
+        "z": "6a9b87f63a2da681",
+        "name": "",
+        "topic": "orion/device-measurement/numValue",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9903a474bc5343cb",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 700,
+        "wires": [
+            [
+                "47af64541b01a741"
+            ]
+        ]
+    },
+    {
+        "id": "47af64541b01a741",
+        "type": "function",
+        "z": "6a9b87f63a2da681",
+        "name": "function 2",
+        "func": "msg.method = \"PATCH\";\nmsg.url = \"http://orion:1026/ngsi-ld/v1/entities/urn:ngsi-ld:MEASUREMENT:id:PMZY:77452386/attrs\";\nmsg.headers = {\n    \"Content-Type\": \"application/json\",\n    \"Link\": \"<http://nodered:1880/context>; rel=\\\"http://www.w3.org/ns/json-ld#context\\\"; type=\\\"application/ld+json\\\"\"\n};\nmsg.payload = {\n    \"numValue\": {\n        \"type\": \"Property\",\n        \"value\": msg.payload.numValue,\n        \"observedAt\": \"2024-11-06T12:34:56Z\"\n    }\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b6c72023462b8d44",
+        "type": "http request",
+        "z": "6a9b87f63a2da681",
+        "name": "",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://orion:1026/ngsi-ld/v1/entities/urn:ngsi-ld:MEASUREMENT:id:PMZY:77452386/attrs",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 850,
+        "y": 700,
+        "wires": [
+            [
+                "786a1e90820ef378"
+            ]
+        ]
+    },
+    {
+        "id": "786a1e90820ef378",
+        "type": "debug",
+        "z": "6a9b87f63a2da681",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1100,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "22f9a8f979869221",
+        "type": "comment",
+        "z": "6a9b87f63a2da681",
+        "name": "simulamos dispositivo 1 publicando cambios por mqtt",
+        "info": "",
+        "x": 600,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "1a7cfa24adcb55dc",
+        "type": "comment",
+        "z": "6a9b87f63a2da681",
+        "name": "recibimos datos de dispositivo 1 y modificamos la entidad en orion-ld con patch",
+        "info": "",
+        "x": 740,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "1",
+        "type": "inject",
+        "z": "6a9b87f63a2da681",
+        "d": true,
+        "name": "Simular valores",
+        "props": [],
+        "repeat": "5",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "2",
+        "topic": "",
+        "x": 190,
+        "y": 900,
+        "wires": [
+            [
+                "2"
+            ]
+        ]
+    },
+    {
+        "id": "2",
+        "type": "function",
+        "z": "6a9b87f63a2da681",
+        "name": "Generar datos",
+        "func": "const temp = (Math.random() * (30 - 15) + 15).toFixed(1);  // Temperatura entre 15 y 30 °C\nconst battery = Math.max(0, (msg.batteryLevel || 0.75) - 0.01).toFixed(2); // Descarga progresiva\n\nmsg.method = \"PATCH\"\n\nmsg.payload = {\n    value: {\n        type: \"Number\",\n        value: parseFloat(temp)  // Solo la temperatura\n    },\n    batteryLevel: {\n        type: \"Number\",\n        value: parseFloat(battery)\n    }\n};\n\nmsg.headers = {\n    \"Content-Type\": \"application/json\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3",
+        "type": "http request",
+        "z": "6a9b87f63a2da681",
+        "name": "Actualizar entidad en Orion",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://orion-v2:1026/v2/entities/device-9845B/attrs",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 780,
+        "y": 900,
+        "wires": [
+            [
+                "4"
+            ]
+        ]
+    },
+    {
+        "id": "4",
+        "type": "debug",
+        "z": "6a9b87f63a2da681",
+        "name": "Respuesta del servidor",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "http-in",
+        "type": "http in",
+        "z": "6a9b87f63a2da681",
+        "name": "Recibir notificación NGSI-v2",
+        "url": "/temperatureNotify",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 1120,
+        "wires": [
+            [
+                "function"
+            ]
+        ]
+    },
+    {
+        "id": "function",
+        "type": "function",
+        "z": "6a9b87f63a2da681",
+        "name": "Convertir NGSI-v2 a NGSI-LD",
+        "func": "\n\n// Entidad NGSI-v2 recibida\nconst entityV2 = msg.payload.data[0];\n\n// Crear la estructura base de NGSI-LD\nconst entityLD = {\n    \"id\": `urn:ngsi-ld:${entityV2.type}:${entityV2.id}`,\n    \"type\": entityV2.type\n};\n\n// Convertir los atributos de NGSI-v2 a NGSI-LD\nObject.keys(entityV2).forEach((key) => {\n    // Ignorar id y type, ya que ya están en la estructura base\n    if (key !== \"id\" && key !== \"type\") {\n        const attribute = entityV2[key];\n\n        // Asegurarse de que el atributo tenga un valor válido\n        if (attribute && attribute.value !== undefined) {\n            entityLD[key] = {\n                \"type\": \"Property\",\n                \"value\": attribute.value\n            };\n\n            // Procesar metadatos si existen\n            if (attribute.metadata) {\n                Object.keys(attribute.metadata).forEach((metaKey) => {\n                    const metaValue = attribute.metadata[metaKey]?.value;\n\n                    // Solo agregar metadatos válidos\n                    if (metaValue !== undefined) {\n                        entityLD[key][metaKey] = {\n                            \"type\": \"Property\",\n                            \"value\": metaValue\n                        };\n                    }\n                });\n            }\n        }\n    }\n});\n\n// Devolver la entidad convertida\nmsg.payload = entityLD;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 1100,
+        "wires": [
+            [
+                "http-response",
+                "8966fd53a66fb3c5"
+            ]
+        ]
+    },
+    {
+        "id": "http-response",
+        "type": "http response",
+        "z": "6a9b87f63a2da681",
+        "name": "Responder a Orion",
+        "statusCode": "200",
+        "headers": {},
+        "x": 810,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "debug",
+        "type": "debug",
+        "z": "6a9b87f63a2da681",
+        "name": "Entidad NGSI-LD",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 730,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "http-request",
+        "type": "http request",
+        "z": "6a9b87f63a2da681",
+        "name": "Enviar entidad NGSI-LD a Orion-LD",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://orion:1026/ngsi-ld/v1/entityOperations/update?options=replace",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "Content-Type",
+                "valueType": "other",
+                "valueValue": "application/json"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "Link",
+                "valueType": "other",
+                "valueValue": "<http://nodered:1880/context>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+            },
+            {
+                "keyType": "other",
+                "keyValue": "NGSILD-Options",
+                "valueType": "other",
+                "valueValue": "upsert"
+            }
+        ],
+        "x": 1260,
+        "y": 1100,
+        "wires": [
+            [
+                "81d3180e7685e324"
+            ]
+        ]
+    },
+    {
+        "id": "81d3180e7685e324",
+        "type": "debug",
+        "z": "6a9b87f63a2da681",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1620,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "8966fd53a66fb3c5",
+        "type": "function",
+        "z": "6a9b87f63a2da681",
+        "name": "convertir en array",
+        "func": "// Convertir el JSON en un JSON array\nmsg.payload = [msg.payload];\nreturn msg;\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 850,
+        "y": 1100,
+        "wires": [
+            [
+                "http-request"
+            ]
+        ]
+    },
+    {
+        "id": "inject",
+        "type": "inject",
+        "z": "5fb6928c81256c34",
+        "name": "Simulate Temperature",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 140,
+        "wires": [
+            [
+                "8bb47d5498d1e328"
+            ]
+        ]
+    },
+    {
+        "id": "8bb47d5498d1e328",
+        "type": "function",
+        "z": "5fb6928c81256c34",
+        "name": "Generate UltraLight Payload",
+        "func": "msg.payload = {\n    \"n\": Math.random() * 10 + 20, // Genera un valor aleatorio entre 20 y 30\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 140,
+        "wires": [
+            [
+                "mqtt",
+                "f95e8df2a987373a"
+            ]
+        ]
+    },
+    {
+        "id": "mqtt",
+        "type": "mqtt out",
+        "z": "5fb6928c81256c34",
+        "name": "Send to MQTT Broker",
+        "topic": "/Xplxo76Aj4QVAEsLRLjPk3eVNcRhb4YD/TempInf/attrs",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9903a474bc5343cb",
+        "x": 1040,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ab99daed4ae2945e",
+        "type": "inject",
+        "z": "5fb6928c81256c34",
+        "name": "Simulate Temperature",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 380,
+        "wires": [
+            [
+                "211ef3d020a462ca"
+            ]
+        ]
+    },
+    {
+        "id": "211ef3d020a462ca",
+        "type": "function",
+        "z": "5fb6928c81256c34",
+        "name": "Generate UltraLight Payload",
+        "func": "msg.payload = {\n    \"n\": Math.random() * 10 + 20, // Genera un valor aleatorio entre 20 y 30\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 380,
+        "wires": [
+            [
+                "dd340b4b1de7df46"
+            ]
+        ]
+    },
+    {
+        "id": "dd340b4b1de7df46",
+        "type": "mqtt out",
+        "z": "5fb6928c81256c34",
+        "name": "Send to MQTT Broker",
+        "topic": "/Xplxo76Aj4QVAEsLRLjPk3eVNcRhb4YD/TempGym/attrs",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9903a474bc5343cb",
+        "x": 1040,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "3529f48a2e45e170",
+        "type": "inject",
+        "z": "5fb6928c81256c34",
+        "name": "Simulate Temperature",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 500,
+        "wires": [
+            [
+                "8846496cb1b7bcc0"
+            ]
+        ]
+    },
+    {
+        "id": "8846496cb1b7bcc0",
+        "type": "function",
+        "z": "5fb6928c81256c34",
+        "name": "Generate UltraLight Payload",
+        "func": "msg.payload = {\n    \"n\": Math.random() * 10 + 20, // Genera un valor aleatorio entre 20 y 30\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 500,
+        "wires": [
+            [
+                "8b475208e9ed44b9"
+            ]
+        ]
+    },
+    {
+        "id": "8b475208e9ed44b9",
+        "type": "mqtt out",
+        "z": "5fb6928c81256c34",
+        "name": "Send to MQTT Broker",
+        "topic": "/Xplxo76Aj4QVAEsLRLjPk3eVNcRhb4YD/TempPsi/attrs",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9903a474bc5343cb",
+        "x": 1020,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "62858137a3b275e1",
+        "type": "inject",
+        "z": "5fb6928c81256c34",
+        "name": "Simulate Temperature",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": "",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 200,
+        "y": 260,
+        "wires": [
+            [
+                "d316b657cc6cb86c"
+            ]
+        ]
+    },
+    {
+        "id": "d316b657cc6cb86c",
+        "type": "function",
+        "z": "5fb6928c81256c34",
+        "name": "Generate UltraLight Payload",
+        "func": "msg.payload = {\n    \"n\": Math.random() * 10 + 20, // Genera un valor aleatorio entre 20 y 30\n};\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 260,
+        "wires": [
+            [
+                "029693322033ad76"
+            ]
+        ]
+    },
+    {
+        "id": "029693322033ad76",
+        "type": "mqtt out",
+        "z": "5fb6928c81256c34",
+        "name": "Send to MQTT Broker",
+        "topic": "/Xplxo76Aj4QVAEsLRLjPk3eVNcRhb4YD/TempArts/attrs",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9903a474bc5343cb",
+        "x": 1040,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "f1a2bec01ba2132a",
+        "type": "comment",
+        "z": "5fb6928c81256c34",
+        "name": "Simular medidas info",
+        "info": "",
+        "x": 620,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "bc2bb17f2543ea74",
+        "type": "comment",
+        "z": "5fb6928c81256c34",
+        "name": "Simular medidas bbaa",
+        "info": "",
+        "x": 640,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "3011e45a98a6528e",
+        "type": "comment",
+        "z": "5fb6928c81256c34",
+        "name": "Simular medidas gym",
+        "info": "",
+        "x": 640,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "084111de9150a562",
+        "type": "comment",
+        "z": "5fb6928c81256c34",
+        "name": "Simular medidas psi",
+        "info": "",
+        "x": 630,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "f95e8df2a987373a",
+        "type": "debug",
+        "z": "5fb6928c81256c34",
+        "name": "debug 8",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "http-in-node",
+        "type": "http in",
+        "z": "45472ef887a7fba0",
+        "name": "",
+        "url": "/subPaneles",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 250,
+        "y": 540,
+        "wires": [
+            [
+                "57333ff582ddc7dc"
+            ]
+        ]
+    },
+    {
+        "id": "debug-node",
+        "type": "debug",
+        "z": "45472ef887a7fba0",
+        "name": "Notification Debug",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "http-response-node",
+        "type": "http response",
+        "z": "45472ef887a7fba0",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 400,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "dfd2d983f9f0f6a5",
+        "type": "debug",
+        "z": "45472ef887a7fba0",
+        "name": "debug 3",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 460,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "da786434ce2d932e",
+        "type": "http in",
+        "z": "45472ef887a7fba0",
+        "name": "",
+        "url": "/subPaneles",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 220,
+        "y": 120,
+        "wires": [
+            [
+                "dfd2d983f9f0f6a5"
+            ]
+        ]
+    },
+    {
+        "id": "57333ff582ddc7dc",
+        "type": "function",
+        "z": "45472ef887a7fba0",
+        "name": "function 3",
+        "func": "\n// Node-RED Function Node\n// Extrae la entidad NGSI-v2 desde el payload\n\nvar payload = msg.payload;\n\n// Verificar si el payload es un string JSON y parsearlo\nif (typeof payload === \"string\") {\n    try {\n        payload = JSON.parse(payload);\n    } catch (e) {\n        node.error(\"Error al parsear el payload\", e);\n        return null;\n    }\n}\n\n// Verificar si el payload contiene \"data\" y si tiene al menos una entidad\nif (!payload.data || !Array.isArray(payload.data) || payload.data.length === 0) {\n    node.error(\"No se encontró una entidad válida en el payload\");\n    return null;\n}\n\n// Extraer la primera entidad del array \"data\"\nmsg.payload = payload.data[0];\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 540,
+        "wires": [
+            [
+                "c6856f8f72a38bf5",
+                "f8a006a38e0466e4"
+            ]
+        ]
+    },
+    {
+        "id": "c6856f8f72a38bf5",
+        "type": "function",
+        "z": "45472ef887a7fba0",
+        "name": "function 4",
+        "func": "// Node-RED Function Node\n// Convierte una entidad NGSI-v2 a múltiples entidades NGSI-LD según una configuración\n\nvar config = global.get(\"ngsi_conversion_config\"); // Configuración cargada en memoria global\nif (!config) {\n    node.error(\"No se encontró la configuración de conversión NGSI\");\n    return null;\n}\n\nvar inputEntity = msg.payload; // Entidad NGSI-v2 recibida\nvar outputEntities = [];\nvar now = new Date().toISOString(); // Fecha actual en formato ISO 8601\n\nconfig.entities.forEach(entityConfig => {\n    var newEntity = {\n        \"id\": entityConfig.idPrefix + (entityConfig.staticId || inputEntity.id),\n        \"type\": entityConfig.type, // Ahora el tipo siempre viene de la configuración\n        \"@context\": \"http://nodered:1880/context\"\n    };\n    \n    if (!newEntity.id) {\n        node.error(\"La entidad no tiene un ID válido\", msg);\n        return null;\n    }\n    \n    Object.keys(entityConfig.attributes).forEach(attr => {\n        var attrConfig = entityConfig.attributes[attr];\n        if (!attrConfig) return; // Si no hay acción definida en la configuración, ignorar el atributo\n        \n        var attrType = attrConfig.type || \"Property\"; // Obtener el tipo desde la configuración\n        \n        if (attrConfig.action === \"copy\" && inputEntity.hasOwnProperty(attr) && inputEntity[attr].hasOwnProperty(\"value\")) {\n            let attrValue = inputEntity[attr].value;\n            if (attrValue !== null && attrValue !== \"null\" && attrValue !== \"\") {\n                // Convertir a array si es necesario\n                if ([\"deviceCategory\", \"ipAddress\", \"controlledProperty\"].includes(attr) && !Array.isArray(attrValue)) {\n                    attrValue = [attrValue];\n                }\n                newEntity[attrConfig[\"ngsi-ld\"]] = {\n                    \"type\": attrType,\n                    \"value\": attrValue\n                };\n            }\n        } else if (attrConfig.action === \"nested\" && Array.isArray(attrConfig.inputs)) {\n            var nestedValue = {};\n            var hasValidValue = false;\n            attrConfig.inputs.forEach((subAttr, index) => {\n                if (inputEntity.hasOwnProperty(subAttr) && inputEntity[subAttr].hasOwnProperty(\"value\")) {\n                    let subAttrKey = attrConfig.subAttributes && attrConfig.subAttributes[index] ? attrConfig.subAttributes[index] : subAttr;\n                    if (inputEntity[subAttr].value !== \"null\" && inputEntity[subAttr].value !== null && inputEntity[subAttr].value !== \"\" && inputEntity[subAttr].value !== 0) {\n                        nestedValue[subAttrKey] = inputEntity[subAttr].value;\n                        hasValidValue = true;\n                    }\n                }\n            });\n            if (hasValidValue) {\n                newEntity[attrConfig[\"ngsi-ld\"]] = {\n                    \"type\": attrType,\n                    \"value\": nestedValue\n                };\n            }\n        } else if (attrConfig.action === \"computed\") {\n            let computedValue = null;\n            switch (attrConfig.operation) {\n                case \"sum\":\n                    computedValue = attrConfig.inputs.reduce((sum, key) => sum + (inputEntity[key]?.value ? parseFloat(inputEntity[key].value) : 0), 0);\n                    break;\n                case \"difference\":\n                    computedValue = (inputEntity[attrConfig.inputs[0]]?.value ? parseFloat(inputEntity[attrConfig.inputs[0]].value) : 0) -\n                                    (inputEntity[attrConfig.inputs[1]]?.value ? parseFloat(inputEntity[attrConfig.inputs[1]].value) : 0);\n                    break;\n                case \"average\":\n                    let values = attrConfig.inputs.map(key => inputEntity[key]?.value ? parseFloat(inputEntity[key].value) : null).filter(v => v !== null);\n                    computedValue = values.length > 0 ? values.reduce((sum, val) => sum + val, 0) / values.length : 0;\n                    break;\n                case \"division\":\n                    let dividend = inputEntity[attrConfig.inputs[0]]?.value ? parseFloat(inputEntity[attrConfig.inputs[0]].value) : 0;\n                    let divisor = inputEntity[attrConfig.inputs[1]]?.value ? parseFloat(inputEntity[attrConfig.inputs[1]].value) : 1;\n                    computedValue = divisor !== 0 ? dividend / divisor : null;\n                    break;\n            }\n            if (computedValue !== null) {\n                newEntity[attrConfig[\"ngsi-ld\"]] = {\n                    \"type\": attrType,\n                    \"value\": computedValue\n                };\n            }\n        } else if (attrConfig.action === \"timestamp\") {\n            newEntity[attrConfig[\"ngsi-ld\"]] = {\n                \"type\": attrType,\n                \"value\": { \"@type\": \"DateTime\", \"@value\": now }\n            };\n        }\n    });\n    \n    // Añadir atributos estáticos si existen en la configuración\n    if (entityConfig.staticAttributes) {\n        Object.keys(entityConfig.staticAttributes).forEach(staticAttr => {\n            newEntity[staticAttr] = entityConfig.staticAttributes[staticAttr];\n        });\n    }\n    \n    outputEntities.push(newEntity);\n});\n\nmsg.payload = outputEntities;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 540,
+        "wires": [
+            [
+                "debug-node",
+                "15e7eda96d2d9a0a"
+            ]
+        ]
+    },
+    {
+        "id": "837350f69275939a",
+        "type": "inject",
+        "z": "45472ef887a7fba0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 340,
+        "y": 400,
+        "wires": [
+            [
+                "46cc14c44701d094"
+            ]
+        ]
+    },
+    {
+        "id": "46cc14c44701d094",
+        "type": "function",
+        "z": "45472ef887a7fba0",
+        "name": "function 5",
+        "func": "// Cargar la configuración NGSI-LD en la memoria global\nvar config = {\n    \"entities\": [\n        {\n            \"type\": \"SolarEnergy\",\n            \"idPrefix\": \"urn:ngsi-ld:SolarEnergy:\",\n            \"staticId\": \"solarEnergy1\",\n            \"attributes\": {\n                \"activePower\": { \"action\": \"nested\", \"ngsi-ld\": \"activePower\", \"inputs\": [\"activePowerF1\", \"activePowerF2\", \"activePowerF3\"], \"subAttributes\": [\"L1\", \"L2\", \"L3\"], \"type\": \"Property\" },\n                \"current\": { \"action\": \"nested\", \"ngsi-ld\": \"current\", \"inputs\": [\"currentF1\", \"currentF2\", \"currentF3\", \"currentN\"], \"subAttributes\": [\"L1\", \"L2\", \"L3\", \"N\"], \"type\": \"Property\" },\n                \"energyGenerated\": { \"action\": \"copy\", \"ngsi-ld\": \"energyGenerated\", \"type\": \"Property\" },\n                \"voltage\": { \"action\": \"average\", \"ngsi-ld\": \"voltage\", \"inputs\": [\"voltageF1\", \"voltageF2\", \"voltageF3\"], \"type\": \"Property\" },\n                \"dateCreated\": { \"action\": \"timestamp\", \"ngsi-ld\": \"dateCreated\", \"type\": \"Property\", \"value\": { \"@type\": \"DateTime\" } },\n                \"dateModified\": { \"action\": \"timestamp\", \"ngsi-ld\": \"dateModified\", \"type\": \"Property\", \"value\": { \"@type\": \"DateTime\" } },\n                \"observationDateTime\": { \"action\": \"timestamp\", \"ngsi-ld\": \"observationDateTime\", \"type\": \"Property\", \"value\": { \"@type\": \"DateTime\" } }\n            },\n            \"staticAttributes\": {\n                \"location\": { \"type\": \"GeoProperty\", \"value\": { \"type\": \"Point\", \"coordinates\": [-1.170406, 38.018872] } },\n                \"address\": { \"type\": \"Property\", \"value\": {\n                    \"streetAddress\": \"Campus de Espinardo, Facultad de Informática\",\n                    \"addressLocality\": \"Murcia\",\n                    \"addressRegion\": \"Región de Murcia\",\n                    \"addressCountry\": \"ES\",\n                    \"postalCode\": \"30100\",\n                    \"postOfficeBoxNumber\": \"\"\n                }},\n                \"description\": { \"type\": \"Property\", \"value\": \"Solar energy monitoring\" },\n                \"name\": { \"type\": \"Property\", \"value\": \"Solar Energy measured at resource 1\" }\n            }\n        },\n        {\n            \"type\": \"Device\",\n            \"idPrefix\": \"urn:ngsi-ld:Device:\",\n            \"attributes\": {\n                \"ipAddress\": { \"action\": \"copy\", \"ngsi-ld\": \"ipAddress\", \"type\": \"Property\" },\n                \"serialNumber\": { \"action\": \"copy\", \"ngsi-ld\": \"serialNumber\", \"type\": \"Property\" },\n                \"batteryLevel\": { \"action\": \"copy\", \"ngsi-ld\": \"batteryLevel\", \"type\": \"Property\" },\n                \"deviceCategory\": { \"action\": \"copy\", \"ngsi-ld\": \"deviceCategory\", \"type\": \"Property\" },\n                \"controlledProperty\": { \"action\": \"copy\", \"ngsi-ld\": \"controlledProperty\", \"type\": \"Property\" },\n                \"dateCreated\": { \"action\": \"timestamp\", \"ngsi-ld\": \"dateCreated\", \"type\": \"Property\", \"value\": { \"@type\": \"DateTime\" } },\n                \"dateFirstUsed\": { \"action\": \"timestamp\", \"ngsi-ld\": \"dateFirstUsed\", \"type\": \"Property\", \"value\": { \"@type\": \"DateTime\" } },\n                \"dateLastCalibration\": { \"action\": \"timestamp\", \"ngsi-ld\": \"dateLastCalibration\", \"type\": \"Property\", \"value\": { \"@type\": \"DateTime\" } },\n                \"dateLastValueReported\": { \"action\": \"timestamp\", \"ngsi-ld\": \"dateLastValueReported\", \"type\": \"Property\", \"value\": { \"@type\": \"DateTime\" } }\n            },\n            \"staticAttributes\": {\n                \"location\": { \"type\": \"GeoProperty\", \"value\": { \"type\": \"Point\", \"coordinates\": [-1.170406, 38.018872] } },\n                \"address\": { \"type\": \"Property\", \"value\": {\n                    \"streetAddress\": \"Campus de Espinardo, Facultad de Informática\",\n                    \"addressLocality\": \"Murcia\",\n                    \"addressRegion\": \"Región de Murcia\",\n                    \"addressCountry\": \"ES\",\n                    \"postalCode\": \"30100\",\n                    \"postOfficeBoxNumber\": \"\"\n                }},\n                \"description\": { \"type\": \"Property\", \"value\": \"Dispositivo de monitoreo de paneles solares\" },\n                \"name\": { \"type\": \"Property\", \"value\": \"Dispositivo de monitoreo de paneles solares\" }\n            }\n        }\n    ]\n}\n;\n\nglobal.set(\"ngsi_conversion_config\", config);\nnode.log(\"Configuración NGSI-LD cargada en memoria global.\");\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 540,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f8a006a38e0466e4",
+        "type": "debug",
+        "z": "45472ef887a7fba0",
+        "name": "debug 4",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "15e7eda96d2d9a0a",
+        "type": "http request",
+        "z": "45472ef887a7fba0",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://orion:1026/ngsi-ld/v1/entityOperations/upsert",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [
+            {
+                "keyType": "other",
+                "keyValue": "Content-Type",
+                "valueType": "other",
+                "valueValue": "application/ld+json"
+            },
+            {
+                "keyType": "other",
+                "keyValue": "Fiware-Service",
+                "valueType": "other",
+                "valueValue": "campus-service"
+            }
+        ],
+        "x": 950,
+        "y": 540,
+        "wires": [
+            [
+                "bbea66fa385896b3"
+            ]
+        ]
+    },
+    {
+        "id": "bbea66fa385896b3",
+        "type": "debug",
+        "z": "45472ef887a7fba0",
+        "name": "debug 5",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "5adc20f3d1e46b27",
+        "type": "http in",
+        "z": "bb62fbf51e7a7598",
+        "name": "Entrada proxy Lepus",
+        "url": "/lepusproxy/*",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 210,
+        "y": 380,
+        "wires": [
+            [
+                "check-token-expiry",
+                "92b79cc3e26bc7cc"
+            ]
+        ]
+    },
+    {
+        "id": "cc2ffccc372f6ce9",
+        "type": "debug",
+        "z": "bb62fbf51e7a7598",
+        "name": "Token obtenido",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1760,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "4fa7e9c295697d45",
+        "type": "function",
+        "z": "bb62fbf51e7a7598",
+        "name": "Preparar llamada a Orion-v2",
+        "func": "const path = msg.req.url.replace(\"/lepusproxy\", \"\");\n\nmsg.url = \"http://smart-campus-living-lab.inf.um.es:1027\" + path;\nmsg.method = msg.req.method;\n\n// Inyectar cabeceras solo si no es /version\nif (path !== \"/version\") {\n    msg.headers = {\n        \"X-AUTH-TOKEN\": msg.token,\n        \"Fiware-Service\": \"ambientmonitoring_cometsensor\",\n        \"Fiware-ServicePath\": \"\"\n    };\n} else {\n    msg.headers = {};  // limpia el token\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 600,
+        "wires": [
+            [
+                "013fa6d67cea0d26",
+                "0266f76ee74e804a"
+            ]
+        ]
+    },
+    {
+        "id": "013fa6d67cea0d26",
+        "type": "debug",
+        "z": "bb62fbf51e7a7598",
+        "name": "Llamada a Orion",
+        "active": true,
+        "console": "false",
+        "complete": "true",
+        "x": 1110,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "0266f76ee74e804a",
+        "type": "http request",
+        "z": "bb62fbf51e7a7598",
+        "name": "Llamar a Orion-v2",
+        "method": "use",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1110,
+        "y": 600,
+        "wires": [
+            [
+                "7dc6855af142b206",
+                "17ffbfa559e9a730"
+            ]
+        ]
+    },
+    {
+        "id": "7dc6855af142b206",
+        "type": "http response",
+        "z": "bb62fbf51e7a7598",
+        "name": "Responder a Lepus",
+        "statusCode": "",
+        "headers": {},
+        "x": 1490,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "prepare-token-string",
+        "type": "function",
+        "z": "bb62fbf51e7a7598",
+        "name": "Preparar datos token (urlencoded)",
+        "func": "msg.payload = \n  \"grant_type=password&username=\" + \n  encodeURIComponent(\"alumno-tfg@um.es\") + \n  \"&password=\" + \n  encodeURIComponent(\"Zt_FDJ71s9E2-pia67fJUKsx2jFTuTfGRWYT\");\n\nmsg.headers = {\n    \"Content-Type\": \"application/x-www-form-urlencoded\",\n    \"Authorization\": \"Basic NTFjYmNkZDYtZGE5YS00ZDEwLWFiYzEtMDI3ZTIxZmFkM2MyOmI0MDFlOTJhLWZiOTctNDc2Zi1iMTEzLTI0ZTk2YmY1NWI2Ng==\"\n};\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "x": 810,
+        "y": 260,
+        "wires": [
+            [
+                "http-token-request-plain"
+            ]
+        ]
+    },
+    {
+        "id": "http-token-request-plain",
+        "type": "http request",
+        "z": "bb62fbf51e7a7598",
+        "name": "Pedir nuevo token",
+        "method": "POST",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "http://smart-campus-living-lab.inf.um.es:3000/oauth2/token",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 1150,
+        "y": 260,
+        "wires": [
+            [
+                "store-token"
+            ]
+        ]
+    },
+    {
+        "id": "25ea3fb28005e460",
+        "type": "file in",
+        "z": "bb62fbf51e7a7598",
+        "name": "",
+        "filename": "/data/user-context.jsonld",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 570,
+        "y": 820,
+        "wires": [
+            [
+                "d5413e4942fb3b01"
+            ]
+        ]
+    },
+    {
+        "id": "9c107c7a0a095c06",
+        "type": "http in",
+        "z": "bb62fbf51e7a7598",
+        "name": "getusercontext",
+        "url": "/usercontext",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 260,
+        "y": 820,
+        "wires": [
+            [
+                "25ea3fb28005e460"
+            ]
+        ]
+    },
+    {
+        "id": "d5413e4942fb3b01",
+        "type": "change",
+        "z": "bb62fbf51e7a7598",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers['Content-Type']",
+                "pt": "msg",
+                "to": "application/ld+json",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 950,
+        "y": 820,
+        "wires": [
+            [
+                "35cede9ca5807e17"
+            ]
+        ]
+    },
+    {
+        "id": "35cede9ca5807e17",
+        "type": "http response",
+        "z": "bb62fbf51e7a7598",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1270,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "check-token-expiry",
+        "type": "function",
+        "z": "bb62fbf51e7a7598",
+        "name": "¿Necesita renovar token?",
+        "func": "\nconst token = flow.get(\"auth_token\");\nconst tokenExp = flow.get(\"auth_token_exp\") || 0;\nconst now = Date.now();\n\nif (!token || now >= tokenExp) {\n    msg.renewToken = true;\n    return [msg, null];  // renovar\n} else {\n    msg.token = token;\n    return [null, msg];  // usar actual\n}\n",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 380,
+        "wires": [
+            [
+                "prepare-token-string"
+            ],
+            [
+                "4fa7e9c295697d45"
+            ]
+        ]
+    },
+    {
+        "id": "store-token",
+        "type": "function",
+        "z": "bb62fbf51e7a7598",
+        "name": "Guardar token y continuar",
+        "func": "\nconst token = msg.payload.access_token;\nconst expiresIn = msg.payload.expires_in || 3600;  // fallback seguro de 1h\n\nconst expirationTime = Date.now() + (expiresIn - 60) * 1000; // restamos 60s de margen\n\nflow.set(\"auth_token\", token);\nflow.set(\"auth_token_exp\", expirationTime);\n\nnode.warn(\"Nuevo token guardado. Expira en: \" + new Date(expirationTime).toISOString());\n\nmsg.token = token;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1430,
+        "y": 260,
+        "wires": [
+            [
+                "cc2ffccc372f6ce9",
+                "4fa7e9c295697d45"
+            ]
+        ]
+    },
+    {
+        "id": "92b79cc3e26bc7cc",
+        "type": "debug",
+        "z": "bb62fbf51e7a7598",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 480,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "17ffbfa559e9a730",
+        "type": "debug",
+        "z": "bb62fbf51e7a7598",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1330,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "f709829c39b32454",
+        "type": "file in",
+        "z": "1199ad461d5d2146",
+        "name": "",
+        "filename": "/data/context.jsonld",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 510,
+        "y": 140,
+        "wires": [
+            [
+                "c169c6553b2ca3ed"
+            ]
+        ]
+    },
+    {
+        "id": "bbb062eb999d9f4d",
+        "type": "http in",
+        "z": "1199ad461d5d2146",
+        "name": "getcontext",
+        "url": "/context",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 140,
+        "wires": [
+            [
+                "f709829c39b32454"
+            ]
+        ]
+    },
+    {
+        "id": "c169c6553b2ca3ed",
+        "type": "change",
+        "z": "1199ad461d5d2146",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers['Content-Type']",
+                "pt": "msg",
+                "to": "application/ld+json",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 910,
+        "y": 140,
+        "wires": [
+            [
+                "a35f1f6744ab7343"
+            ]
+        ]
+    },
+    {
+        "id": "a35f1f6744ab7343",
+        "type": "http response",
+        "z": "1199ad461d5d2146",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1230,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ead4c45e41310a36",
+        "type": "comment",
+        "z": "1199ad461d5d2146",
+        "name": "servimos el contexto en url /context",
+        "info": "",
+        "x": 620,
+        "y": 60,
+        "wires": []
+    }
+]

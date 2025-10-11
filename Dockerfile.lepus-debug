@@ -1,0 +1,14 @@
+FROM node:18-slim
+
+# Instala bash y herramientas básicas
+RUN apt-get update && apt-get install -y bash curl
+
+WORKDIR /opt/adapter
+
+# Copia el código de Lepus
+COPY lepus/ .
+
+# Instala dependencias
+RUN npm install
+
+CMD ["bash"]

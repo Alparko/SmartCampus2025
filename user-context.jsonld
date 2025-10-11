@@ -1,0 +1,31 @@
+{
+    "@context": {
+      "id": "@id",
+      "type": "@type",
+      "activePowerF1": "https://smartdatamodels.org/dataModel.Energy/activePower",
+      "Device": "https://smartdatamodels.org/dataModel.Device/Device",
+      "activePowerF2": "https://smartdatamodels.org/dataModel.Energy/activePower",
+      "activePowerF3": "https://smartdatamodels.org/dataModel.Energy/activePower",
+      "currentF1": "https://smartdatamodels.org/dataModel.Energy/phaseCurrent",
+      "currentF2": "https://smartdatamodels.org/dataModel.Energy/phaseCurrent",
+      "currentF3": "https://smartdatamodels.org/dataModel.Energy/phaseCurrent",
+      "currentN": "https://smartdatamodels.org/dataModel.Energy/current",
+      "energyGenerated": "https://smartdatamodels.org/dataModel.Energy/energyGenerated",
+      "voltageF1": "https://smartdatamodels.org/dataModel.Energy/voltage",
+      "voltageF2": "https://smartdatamodels.org/dataModel.Energy/voltage",
+      "voltageF3": "https://smartdatamodels.org/dataModel.Energy/voltage",
+      "activePowerFN": "https://smartdatamodels.org/dataModel.Energy/powerFactor",
+      "apparentPowerFN": "https://smartdatamodels.org/dataModel.Energy/powerFactor",
+      "reactivePowerF1": "https://smartdatamodels.org/dataModel.Energy/totalReactivePower",
+      "reactivePowerF2": "https://smartdatamodels.org/dataModel.Energy/totalReactivePower",
+      "reactivePowerF3": "https://smartdatamodels.org/dataModel.Energy/totalReactivePower",
+      "totalActivePower": "https://smartdatamodels.org/dataModel.Energy/totalActivePower",
+      "totalEnergyGenerated": "https://smartdatamodels.org/dataModel.Energy/totalEnergyGenerated",
+      "maxSolarPowerMeasure": "https://smartdatamodels.org/dataModel.Energy/maxSolarPowerMeasure",
+      "frequency": "https://smartdatamodels.org/dataModel.Energy/frequency",
+      "dateCreated": "https://smartdatamodels.org/dateCreated",
+      "dateModified": "https://smartdatamodels.org/dateModified",
+      "observationDateTime": "https://smartdatamodels.org/dataModel.Energy/observationDateTime"
+    }
+  }
+  

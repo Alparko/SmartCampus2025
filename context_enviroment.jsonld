@@ -1,0 +1,22 @@
+{
+    "@context": {
+      "id": "@id",
+      "type": "@type",
+      "serialNumber": "https://schema.org/serialNumber",
+      "co2": "https://smartdatamodels.org/dataModel.Environment/co2",
+      "areaServed": "https://schema.org/areaServed",
+      "relativeHumidity": "https://smartdatamodels.org/dataModel.Environment/relativeHumidity",
+      "rssi": "https://smartdatamodels.org/dataModel.Device/rssi",
+      "temperature": "https://smartdatamodels.org/dataModel.Environment/temperature",
+      "category": "https://smartdatamodels.org/dataModel.Device/category",
+      "controlledProperty": "https://smartdatamodels.org/dataModel.Device/controlledProperty",
+      "controlledAsset": "https://smartdatamodels.org/dataModel.Device/controlledAsset",
+      "dateLastValueReported": "https://smartdatamodels.org/dataModel.Device/dateLastValueReported",
+      "description": "http://purl.org/dc/terms/description",
+      "barometricPressure": "https://example.org/unknown/barometricPressure",
+      "ipAddress": "https://smartdatamodels.org/dataModel.Device/ipAddress",
+      "macAddress": "https://smartdatamodels.org/dataModel.Device/macAddress",
+      "dataProvider": "https://smartdatamodels.org/dataProvider"
+    }
+  }
+  
