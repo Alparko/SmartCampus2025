@@ -1,0 +1,62 @@
+{
+    "id": "urn:ngsi-ld:Building:Campus-Gym",
+    "type": "Building",
+    "address": {
+      "type": "Property",
+      "value": {
+        "addressLocality": "Murcia",
+        "postalCode": "30100",
+        "streetAddress": "Campus de Espinardo, Complejo Deportivo"
+      }
+    },
+    "category": {
+      "type": "Property",
+      "value": ["gym"]
+    },
+    "description": {
+      "type": "Property",
+      "value": "Campus Gym offering fitness equipment, classes, and facilities for sports."
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [37.0015, -1.1580],
+            [37.0017, -1.1582],
+            [37.0016, -1.1584],
+            [37.0014, -1.1583],
+            [37.0015, -1.1580]
+          ]
+        ]
+      }
+    },
+    "openingHours": {
+      "type": "Property",
+      "value": ["Mo-Fr 07:00-22:00", "Sa-Su 08:00-20:00"]
+    },
+    "facilities": {
+      "type": "Property",
+      "value": ["weightlifting", "cardio", "swimming pool", "yoga studio"]
+    },
+    "contactPoint": {
+      "type": "Property",
+      "value": {
+        "email": "gimnasio@um.es",
+        "telephone": "+34 968 654 321"
+      }
+    },
+    "providedBy": {
+      "type": "Relationship",
+      "object": ["urn:ngsi-ld:Organization:UM"]
+    },
+    "source": {
+      "type": "Property",
+      "value": "http://www.um.es"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+  }
+  

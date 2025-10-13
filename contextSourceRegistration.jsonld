@@ -1,48 +1,13 @@
 {
-  "id": "urn:ngsi-ld:ContextSourceRegistration:lepus",
-  "type": "ContextSourceRegistration",
-  "information": [
-    {
-      "entities": [
-        {
-          "idPattern": ".*",
-          "type": "Device"
-        }
-      ],
-      "properties": [
-        "areaServed",
-        "barometricPressure",
-        "category",
-        "co2",
-        "controlledAsset",
-        "controlledProperty",
-        "dataProvider",
-        "dateLastValueReported",
-        "description",
-        "ipAddress",
-        "macAddress",
-        "relativeHumidity",
-        "rssi",
-        "serialNumber",
-        "temperature"
-      ]
-    }
-  ],
-  "endpoint": "http://lepus:3000/ngsi-ld/v1/entities",
-  "contextSourceInfo": [
-    {
-      "key": "jsonldContext",
-      "value": "http://nodered:1880/user-context.jsonld"
-    },
-    {
-      "key": "Prefer",
-      "value": "ngsi-ld=1.6"
-    }
-  ],
-  "mode": "inclusive",
-  "operations": ["federationOps"],
-  "@context": [
-    "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.8.jsonld",
-    "http://nodered:1880/usercontext"
-  ]
+    "type": "ContextSourceRegistration",
+    "information": [
+        {"entities": [{"type": "Device"}]}
+    ],
+    "contextSourceInfo": [
+        {"key": "jsonldContext","value": "http://nodered:1880/usercontext"},
+        {"key": "Prefer", "value": "ngsi-ld=1.6"}
+    ],
+    "mode": "inclusive",
+    "operations": ["federationOps"],
+    "endpoint": "http://adapter:3000"
 }

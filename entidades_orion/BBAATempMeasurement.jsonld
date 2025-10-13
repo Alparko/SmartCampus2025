@@ -1,0 +1,56 @@
+{
+    "id": "urn:ngsi-ld:DeviceMeasurement:TempArts",
+    "type": "DeviceMeasurement",
+    "address": {
+        "type": "Property",
+        "value": {
+            "streetAddress": "Campus de Espinardo, Facultad de Bellas Artes",
+            "addressLocality": "Murcia",
+            "addressRegion": "Murcia",
+            "addressCountry": "Spain",
+            "postalCode": "30100"
+        }
+    },
+    "controlledProperty": {
+        "type": "Property",
+        "value": "temperature"
+    },
+    "dateObserved": {
+        "type": "Property",
+        "value": "2024-11-27T10:35:00Z"
+    },
+    "description": {
+        "type": "Property",
+        "value": "Temperature measurement from the Faculty of Fine Arts sensor."
+    },
+    "deviceType": {
+        "type": "Property",
+        "value": "sensor"
+    },
+    "location": {
+        "type": "Property",
+        "value": {
+            "type": "Point",
+            "coordinates": [37.0005, -1.1569]
+        }
+    },
+    "measurementType": {
+        "type": "Property",
+        "value": "temperature"
+    },
+    "numValue": {
+        "type": "Property",
+        "value": 21.8
+    },
+    "unit": {
+        "type": "Property",
+        "value": "CEL"
+    },
+    "refDevice": {
+        "type": "Property",
+        "value": "urn:ngsi-ld:Device:TempSensor-Faculty-Fine-Arts"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+}

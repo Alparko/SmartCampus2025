@@ -1,0 +1,70 @@
+{
+    "id": "urn:ngsi-ld:Building:Faculty-Psychology",
+    "type": "Building",
+    "address": {
+      "type": "Property",
+      "value": {
+        "addressLocality": "Murcia",
+        "postalCode": "30100",
+        "streetAddress": "Campus de Espinardo, Facultad de Psicología"
+      }
+    },
+    "category": {
+      "type": "Property",
+      "value": ["university"]
+    },
+    "description": {
+      "type": "Property",
+      "value": "Faculty focused on education and research in psychology and behavioral sciences."
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [37.0012, -1.1570],
+            [37.0014, -1.1572],
+            [37.0013, -1.1574],
+            [37.0011, -1.1573],
+            [37.0012, -1.1570]
+          ]
+        ]
+      }
+    },
+    "floorsAboveGround": {
+      "type": "Property",
+      "value": 3
+    },
+    "floorsBelowGround": {
+      "type": "Property",
+      "value": 1
+    },
+    "openingHours": {
+      "type": "Property",
+      "value": ["Mo-Fr 08:00-21:00", "Sa 09:00-14:00"]
+    },
+    "departments": {
+      "type": "Property",
+      "value": ["Clinical Psychology", "Educational Psychology", "Social Psychology"]
+    },
+    "contactPoint": {
+      "type": "Property",
+      "value": {
+        "email": "psicologia@um.es",
+        "telephone": "+34 968 789 123"
+      }
+    },
+    "providedBy": {
+      "type": "Relationship",
+      "object": ["urn:ngsi-ld:Organization:UM"]
+    },
+    "source": {
+      "type": "Property",
+      "value": "http://www.um.es"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+  }
+  

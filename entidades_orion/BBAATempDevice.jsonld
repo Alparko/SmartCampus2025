@@ -1,0 +1,43 @@
+{
+    "id": "urn:ngsi-ld:Device:TempSensor-Faculty-Fine-Arts",
+    "type": "Device",
+    "batteryLevel": {
+      "type": "Property",
+      "value": 0.90
+    },
+    "deviceCategory": {
+      "type": "Property",
+      "value": ["sensor"]
+    },
+    "controlledAsset": {
+      "type": "Relationship",
+      "object": ["urn:ngsi-ld:Building:Faculty-Fine-Arts"]
+    },
+    "controlledProperty": {
+      "type": "Property",
+      "value": ["temperature"]
+    },
+    "dateFirstUsed": {
+      "type": "Property",
+      "value": {
+        "@type": "DateTime",
+        "@value": "2021-03-12T10:30:00Z"
+      }
+    },
+    "deviceState": {
+      "type": "Property",
+      "value": "ok"
+    },
+    "ipAddress": {
+      "type": "Property",
+      "value": ["192.168.1.20"]
+    },
+    "serialNumber": {
+      "type": "Property",
+      "value": "TS-FA-002"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+  }
+  

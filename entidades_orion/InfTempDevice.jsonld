@@ -1,0 +1,43 @@
+{
+    "id": "urn:ngsi-ld:Device:TempSensor-Faculty-Informatics",
+    "type": "Device",
+    "batteryLevel": {
+      "type": "Property",
+      "value": 0.85
+    },
+    "deviceCategory": {
+      "type": "Property",
+      "value": ["sensor"]
+    },
+    "controlledAsset": {
+      "type": "Relationship",
+      "object": ["urn:ngsi-ld:Building:Faculy-Computer-Science"]
+    },
+    "controlledProperty": {
+      "type": "Property",
+      "value": ["temperature"]
+    },
+    "dateFirstUsed": {
+      "type": "Property",
+      "value": {
+        "@type": "DateTime",
+        "@value": "2020-05-15T08:00:00Z"
+      }
+    },
+    "deviceState": {
+      "type": "Property",
+      "value": "ok"
+    },
+    "ipAddress": {
+      "type": "Property",
+      "value": ["192.168.1.10"]
+    },
+    "serialNumber": {
+      "type": "Property",
+      "value": "TS-INF-001"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+  }
+  

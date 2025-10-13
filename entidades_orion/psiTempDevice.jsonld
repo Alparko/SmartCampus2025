@@ -1,0 +1,43 @@
+{
+    "id": "urn:ngsi-ld:Device:TempSensor-Faculty-Psychology",
+    "type": "Device",
+    "batteryLevel": {
+      "type": "Property",
+      "value": 0.80
+    },
+    "deviceCategory": {
+      "type": "Property",
+      "value": ["sensor"]
+    },
+    "controlledAsset": {
+      "type": "Relationship",
+      "object": ["urn:ngsi-ld:Building:Faculty-Psychology"]
+    },
+    "controlledProperty": {
+      "type": "Property",
+      "value": ["temperature"]
+    },
+    "dateFirstUsed": {
+      "type": "Property",
+      "value": {
+        "@type": "DateTime",
+        "@value": "2023-06-10T11:00:00Z"
+      }
+    },
+    "deviceState": {
+      "type": "Property",
+      "value": "ok"
+    },
+    "ipAddress": {
+      "type": "Property",
+      "value": ["192.168.1.40"]
+    },
+    "serialNumber": {
+      "type": "Property",
+      "value": "TS-PSY-004"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+  }
+  

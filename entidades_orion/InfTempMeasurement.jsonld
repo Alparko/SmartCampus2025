@@ -1,0 +1,56 @@
+{
+    "id": "urn:ngsi-ld:DeviceMeasurement:TempInf",
+    "type": "DeviceMeasurement",
+    "address": {
+        "type": "Property",
+        "value": {
+            "streetAddress": "Campus de Espinardo, Facultad de Informática",
+            "addressLocality": "Murcia",
+            "addressRegion": "Murcia",
+            "addressCountry": "Spain",
+            "postalCode": "30100"
+        }
+    },
+    "controlledProperty": {
+        "type": "Property",
+        "value": "temperature"
+    },
+    "dateObserved": {
+        "type": "Property",
+        "value": "2024-11-27T10:30:00Z"
+    },
+    "description": {
+        "type": "Property",
+        "value": "Temperature measurement from the Faculty of Informatics sensor."
+    },
+    "deviceType": {
+        "type": "Property",
+        "value": "sensor"
+    },
+    "location": {
+        "type": "Property",
+        "value": {
+            "type": "Point",
+            "coordinates": [37.0001, -1.1564]
+        }
+    },
+    "measurementType": {
+        "type": "Property",
+        "value": "temperature"
+    },
+    "numValue": {
+        "type": "Property",
+        "value": 22.5
+    },
+    "unit": {
+        "type": "Property",
+        "value": "CEL"
+    },
+    "refDevice": {
+        "type": "Property",
+        "value": "urn:ngsi-ld:Device:TempSensor-Faculty-Informatics"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+}

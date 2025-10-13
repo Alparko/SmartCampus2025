@@ -1,0 +1,43 @@
+{
+    "id": "urn:ngsi-ld:Device:OccupancySensor-Faculty-Psychology",
+    "type": "Device",
+    "batteryLevel": {
+      "type": "Property",
+      "value": 0.90
+    },
+    "deviceCategory": {
+      "type": "Property",
+      "value": ["sensor"]
+    },
+    "controlledAsset": {
+      "type": "Relationship",
+      "object": ["urn:ngsi-ld:Building:Faculty-Psychology"]
+    },
+    "controlledProperty": {
+      "type": "Property",
+      "value": ["occupancy"]
+    },
+    "dateFirstUsed": {
+      "type": "Property",
+      "value": {
+        "@type": "DateTime",
+        "@value": "2023-05-01T10:00:00Z"
+      }
+    },
+    "deviceState": {
+      "type": "Property",
+      "value": "ok"
+    },
+    "ipAddress": {
+      "type": "Property",
+      "value": ["192.168.2.40"]
+    },
+    "serialNumber": {
+      "type": "Property",
+      "value": "OS-PSY-004"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+  }
+  

@@ -1,0 +1,86 @@
+{
+    "id": "urn:ngsi-ld:Building:Faculty-Fine-Arts",
+    "type": "Building",
+    "address": {
+      "type": "Property",
+      "value": {
+        "addressLocality": "Murcia",
+        "postalCode": "30100",
+        "streetAddress": "Campus de Espinardo, Facultad de Bellas Artes"
+      }
+    },
+    "category": {
+      "type": "Property",
+      "value": ["university"]
+    },
+    "containedInPlace": {
+      "type": "Property",
+      "value": {
+        "coordinates": [
+          [
+            [37.0005, -1.1569],
+            [37.0007, -1.1571],
+            [37.0006, -1.1573],
+            [37.0004, -1.1572],
+            [37.0005, -1.1569]
+          ]
+        ],
+        "type": "Polygon"
+      }
+    },
+    "createdAt": {
+      "type": "Property",
+      "value": "2024-11-27T10:00:00Z"
+    },
+    "dataProvider": {
+      "type": "Property",
+      "value": "University of Murcia"
+    },
+    "description": {
+      "type": "Property",
+      "value": "Faculty dedicated to Fine Arts, including painting, sculpture, and visual arts."
+    },
+    "floorsAboveGround": {
+      "type": "Property",
+      "value": 2
+    },
+    "floorsBelowGround": {
+      "type": "Property",
+      "value": 1
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [37.0005, -1.1569],
+            [37.0007, -1.1571],
+            [37.0006, -1.1573],
+            [37.0004, -1.1572],
+            [37.0005, -1.1569]
+          ]
+        ]
+      }
+    },
+    "modifiedAt": {
+      "type": "Property",
+      "value": "2024-11-27T10:00:00Z"
+    },
+    "openingHours": {
+      "type": "Property",
+      "value": ["Mo-Fr 09:00-20:00", "Sa 10:00-15:00"]
+    },
+    "owner": {
+      "type": "Relationship",
+      "object": ["urn:ngsi-ld:Organization:UM"]
+    },
+    "source": {
+      "type": "Property",
+      "value": "http://www.um.es"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+  }
+  

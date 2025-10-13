@@ -1,0 +1,43 @@
+{
+    "id": "urn:ngsi-ld:Device:OccupancySensor-Faculty-Informatics",
+    "type": "Device",
+    "batteryLevel": {
+      "type": "Property",
+      "value": 0.80
+    },
+    "deviceCategory": {
+      "type": "Property",
+      "value": ["sensor"]
+    },
+    "controlledAsset": {
+      "type": "Relationship",
+      "object": ["urn:ngsi-ld:Building:Faculy-Computer-Science"]
+    },
+    "controlledProperty": {
+      "type": "Property",
+      "value": ["occupancy"]
+    },
+    "dateFirstUsed": {
+      "type": "Property",
+      "value": {
+        "@type": "DateTime",
+        "@value": "2020-07-01T09:00:00Z"
+      }
+    },
+    "deviceState": {
+      "type": "Property",
+      "value": "ok"
+    },
+    "ipAddress": {
+      "type": "Property",
+      "value": ["192.168.2.10"]
+    },
+    "serialNumber": {
+      "type": "Property",
+      "value": "OS-INF-001"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+  }
+  

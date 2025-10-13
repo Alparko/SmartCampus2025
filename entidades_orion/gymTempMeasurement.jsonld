@@ -1,0 +1,56 @@
+{
+    "id": "urn:ngsi-ld:DeviceMeasurement:TempGym",
+    "type": "DeviceMeasurement",
+    "address": {
+        "type": "Property",
+        "value": {
+            "streetAddress": "Campus de Espinardo, Gimnasio",
+            "addressLocality": "Murcia",
+            "addressRegion": "Murcia",
+            "addressCountry": "Spain",
+            "postalCode": "30100"
+        }
+    },
+    "controlledProperty": {
+        "type": "Property",
+        "value": "temperature"
+    },
+    "dateObserved": {
+        "type": "Property",
+        "value": "2024-11-27T10:40:00Z"
+    },
+    "description": {
+        "type": "Property",
+        "value": "Temperature measurement from the Campus Gym sensor."
+    },
+    "deviceType": {
+        "type": "Property",
+        "value": "sensor"
+    },
+    "location": {
+        "type": "Property",
+        "value": {
+            "type": "Point",
+            "coordinates": [37.0015, -1.1580]
+        }
+    },
+    "measurementType": {
+        "type": "Property",
+        "value": "temperature"
+    },
+    "numValue": {
+        "type": "Property",
+        "value": 23.2
+    },
+    "unit": {
+        "type": "Property",
+        "value": "CEL"
+    },
+    "refDevice": {
+        "type": "Property",
+        "value": "urn:ngsi-ld:Device:TempSensor-Campus-Gym"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+}

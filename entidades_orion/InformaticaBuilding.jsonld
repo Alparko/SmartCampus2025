@@ -1,0 +1,70 @@
+{
+    "id": "urn:ngsi-ld:Building:Faculy-Computer-Science",
+    "type": "Building",
+    "address": {
+      "type": "Property",
+      "value": {
+        "addressLocality": "Murcia",
+        "postalCode": "30100",
+        "streetAddress": "Campus de Espinardo, Facultad de Informática"
+      }
+    },
+    "category": {
+      "type": "Property",
+      "value": ["university"]
+    },
+    "containedInPlace": {
+      "type": "Property",
+      "value": {
+        "coordinates": [[[37.0001, -1.1564], [37.0003, -1.1566], [37.0002, -1.1568], [37.0000, -1.1567], [37.0001, -1.1564]]],
+        "type": "Polygon"
+      }
+    },
+    "createdAt": {
+      "type": "Property",
+      "value": "2024-11-27T10:00:00Z"
+    },
+    "dataProvider": {
+      "type": "Property",
+      "value": "University of Murcia"
+    },
+    "description": {
+      "type": "Property",
+      "value": "Faculty dedicated to Computer Science and Information Technology."
+    },
+    "floorsAboveGround": {
+      "type": "Property",
+      "value": 3
+    },
+    "floorsBelowGround": {
+      "type": "Property",
+      "value": 0
+    },
+    "location": {
+      "type": "GeoProperty",
+      "value": {
+        "type": "Polygon",
+        "coordinates": [[[37.0001, -1.1564], [37.0003, -1.1566], [37.0002, -1.1568], [37.0000, -1.1567], [37.0001, -1.1564]]]
+      }
+    },
+    "modifiedAt": {
+      "type": "Property",
+      "value": "2024-11-27T10:00:00Z"
+    },
+    "openingHours": {
+      "type": "Property",
+      "value": ["Mo-Fr 08:00-21:00", "Sa 09:00-14:00"]
+    },
+    "owner": {
+      "type": "Relationship",
+      "object": ["urn:ngsi-ld:Organization:UM"]
+    },
+    "source": {
+      "type": "Property",
+      "value": "http://www.um.es"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+  }
+  

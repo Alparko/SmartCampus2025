@@ -1,0 +1,56 @@
+{
+    "id": "urn:ngsi-ld:DeviceMeasurement:TempPsi",
+    "type": "DeviceMeasurement",
+    "address": {
+        "type": "Property",
+        "value": {
+            "streetAddress": "Campus de Espinardo, Facultad de Psicología",
+            "addressLocality": "Murcia",
+            "addressRegion": "Murcia",
+            "addressCountry": "Spain",
+            "postalCode": "30100"
+        }
+    },
+    "controlledProperty": {
+        "type": "Property",
+        "value": "temperature"
+    },
+    "dateObserved": {
+        "type": "Property",
+        "value": "2024-11-27T10:45:00Z"
+    },
+    "description": {
+        "type": "Property",
+        "value": "Temperature measurement from the Faculty of Psychology sensor."
+    },
+    "deviceType": {
+        "type": "Property",
+        "value": "sensor"
+    },
+    "location": {
+        "type": "Property",
+        "value": {
+            "type": "Point",
+            "coordinates": [37.0012, -1.1570]
+        }
+    },
+    "measurementType": {
+        "type": "Property",
+        "value": "temperature"
+    },
+    "numValue": {
+        "type": "Property",
+        "value": 22.0
+    },
+    "unit": {
+        "type": "Property",
+        "value": "CEL"
+    },
+    "refDevice": {
+        "type": "Property",
+        "value": "urn:ngsi-ld:Device:TempSensor-Faculty-Psychology"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+}

@@ -1,0 +1,43 @@
+{
+    "id": "urn:ngsi-ld:Device:OccupancySensor-Campus-Gym",
+    "type": "Device",
+    "batteryLevel": {
+      "type": "Property",
+      "value": 0.75
+    },
+    "deviceCategory": {
+      "type": "Property",
+      "value": ["sensor"]
+    },
+    "controlledAsset": {
+      "type": "Relationship",
+      "object": ["urn:ngsi-ld:Building:Campus-Gym"]
+    },
+    "controlledProperty": {
+      "type": "Property",
+      "value": ["occupancy"]
+    },
+    "dateFirstUsed": {
+      "type": "Property",
+      "value": {
+        "@type": "DateTime",
+        "@value": "2022-02-15T11:00:00Z"
+      }
+    },
+    "deviceState": {
+      "type": "Property",
+      "value": "ok"
+    },
+    "ipAddress": {
+      "type": "Property",
+      "value": ["192.168.2.30"]
+    },
+    "serialNumber": {
+      "type": "Property",
+      "value": "OS-GYM-003"
+    },
+    "@context": [
+      "http://nodered:1880/context"
+    ]
+  }
+  
