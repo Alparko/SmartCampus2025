@@ -1,7 +1,7 @@
 services:
   # Orion is the context broker
   orion:
-    image: quay.io/fiware/orion-ld
+    image: quay.io/fiware/orion-ld:1.9.0
     hostname: orion
     container_name: fiware-orion
     restart: always
@@ -123,7 +123,7 @@ services:
       - IOTA_CB_NGSI_VERSION=ld
       - IOTA_AUTOCAST=true
       - IOTA_MONGO_HOST=mongo-db
-      - IOTA_FALLBACK_TENANT=campus-service
+      - IOTA_FALLBACK_TENANT=campustenant
       - IOTA_MONGO_PORT=27017
       - IOTA_MONGO_DB=iotagentul
       - IOTA_HTTP_PORT=7896
@@ -152,6 +152,26 @@ services:
       NOTIFICATION_RELAY_URL: "http://adapter:3000/notify"
     #depends_on:
      # - nodered
+
+  
+  grafana:
+    image: grafana/grafana:11.3.0
+    container_name: grafana
+    restart: unless-stopped
+    ports:
+      - "3010:3010"           # http://localhost:3000
+    environment:
+      GF_SECURITY_ADMIN_USER: admin
+      GF_SECURITY_ADMIN_PASSWORD: admin
+      GF_USERS_DEFAULT_THEME: light
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning   # (opcional pero recomendado)
+    depends_on:
+      - timescale
+    networks:
+      - fiware_network
+
 
 volumes:
   mongo-db: ~

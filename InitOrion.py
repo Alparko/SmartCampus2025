@@ -44,6 +44,6 @@ def upload_entities(folder_path, orion_url, link_header, fiware_service):
 folder_path = './entidades_orion'  # Cambia esto a tu ruta
 orion_url = 'http://apr.inf.um.es:1026/ngsi-ld/v1/entities'
 link_header = '<http://nodered:1880/context>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
-fiware_service = 'campus-service'
+fiware_service = 'campustenant'
 
 upload_entities(folder_path, orion_url, link_header, fiware_service)
